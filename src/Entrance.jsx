@@ -1,6 +1,16 @@
+import { useState } from "react";
+import { useAuth } from "./AuthContext";
+
 /** Users can enter their name to receive a token from the API. */
 export default function Entrance() {
   // TODO: call signup when form is submitted
+  const { signup } = useAuth();
+  const [username, setUsername] = useState();
+
+  async function submit(e) {
+    e.preventDefault();
+    await signup(username);
+  }
 
   return (
     <>
@@ -15,10 +25,12 @@ export default function Entrance() {
         fixed on you. The one on the left opens its mouth, and with a deep,
         rumbling voice, it asks, "Who approaches? Speak your name."
       </p>
-      <form>
+      <form onSubmit={submit}>
         <label>
           Name
-          <input name="name" />
+          <input 
+            name="name"
+            onChange={(e) => setUsername(e.target.value)} />
         </label>
         <button>Respond</button>
       </form>
