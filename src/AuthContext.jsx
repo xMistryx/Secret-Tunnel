@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
   // TODO: authenticate
   const authenticate = async () => {
     if (!token) {
-    throw new Error(error);
+    throw new Error("error");
     }
     try {
       const response = await fetch(`${API}/authenticate`, {
